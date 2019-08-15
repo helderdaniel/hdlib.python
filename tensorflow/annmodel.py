@@ -104,7 +104,8 @@ class ANNModel():
         if verbose == 3:
             filename += '-{epoch:04d}-{val_loss:.6f}.h5'
             save = tf.keras.callbacks.ModelCheckpoint(filepath=filename, verbose=verbose, period=epochPeriod)
-        self._callbacks.append(save)
+        if verbose != 0:
+            self._callbacks.append(save)
 
     #Train the model
     def train(self, trainXs, trainYs, epochs=10, validationSplit=0.2, batchSize=128, 

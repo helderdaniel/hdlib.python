@@ -43,31 +43,3 @@ class Stopwatch(Base):
         read(0) returns always 0.
         """
         return self._laps[idx]
-
-
-##############
-# Unit tests #
-##############
-import unittest
-
-chrono = Stopwatch()
-
-class TestStopWatch(unittest.TestCase):
-    """Unit tests."""
-    def test0(self): 
-        chrono.reset()
-        sleep(1)
-        chrono.lap()
-        sleep(2)
-        chrono.lap()
-        self.assertEqual("0", str(chrono.read(0)).split(".")[0])
-        self.assertEqual("1", str(chrono.read(1)).split(".")[0])
-        self.assertEqual("3", str(chrono.read(2)).split(".")[0])
-
-
-#This way only runs if NOT imported!
-if __name__ == "__main__":
-    unittest.main()
-
-
-
