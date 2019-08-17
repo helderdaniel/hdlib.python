@@ -4,7 +4,7 @@
 #v0.1 feb 2019
 #hdaniel@ualg.pt
 #
-from hdlib.data.dataseries.dataseries import *
+from hdlib.data.dataseries.dataseries import DataSeries
 
 ##############
 # Unit tests #

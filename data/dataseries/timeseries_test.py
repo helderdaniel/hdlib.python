@@ -9,6 +9,8 @@ from hdlib.data.dataseries.timeseries import *
 # Unit tests #
 ##############
 import unittest
+from typing import ClassVar, Any, Tuple, Type, List
+import pandas as pd
 import matplotlib.pyplot as plt
 
 plot     : bool = False
@@ -34,7 +36,8 @@ class TestTimeSeries(unittest.TestCase):
 	'''
 	def __init__(self, *args, **kwargs):
 		super().__init__(*args, **kwargs)
-		#code to be executed before each test
+		#code to be executed before all tests
+		#with python 3 prefer: 	setUpClass(cls) class method
 	
 	def setUp(self):
 		#code to be executed before each test
@@ -42,7 +45,7 @@ class TestTimeSeries(unittest.TestCase):
 	
 	@classmethod
 	def setUpClass(cls) -> None:
-		#code to be executed only once before tests start
+		#code to be executed only once before all tests start
 		#Get market data
 		cls.marketDataTS = TimeSeries.fromCSV(seriesFN, allColumNames, 'Date')
 		#Sort ascending time index

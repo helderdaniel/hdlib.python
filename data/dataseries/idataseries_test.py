@@ -3,7 +3,7 @@
 #v0.1 feb 2019
 #hdaniel@ualg.pt
 #
-from hdlib.data.dataseries.idataseries import *
+from hdlib.data.dataseries.idataseries import IDataSeries
 
 ##############
 # Unit tests #
