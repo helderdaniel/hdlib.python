@@ -1,8 +1,9 @@
-#Simple chrome browser htl, javascript parser
-#
-#v0.1 jul 2019
-#hdaniel@ualg.pt
-#
+'''
+Simple chrome browser htl, javascript parser
+
+v0.1 jul 2019
+hdaniel@ualg.pt
+'''
 from hdlib.net.ChromeBrowser import ChromeBrowser
 
 ##############

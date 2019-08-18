@@ -1,10 +1,11 @@
-#Plots for tensorflow
-#
-#in development
-#
-#v0.01 jan 2019
-#hdaniel@ualg.pt
+'''
+Plots for tensorflow
 
+in development
+
+v0.01 jan 2019
+hdaniel@ualg.pt
+'''
 import matplotlib.pyplot as plt
 
 

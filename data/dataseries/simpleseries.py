@@ -1,8 +1,9 @@
-#Manipulate multiple series 
-#
-#v0.1 feb 2019
-#hdaniel@ualg.pt
-#
+'''
+Manipulate multiple series 
+
+v0.1 feb 2019
+hdaniel@ualg.pt
+'''
 from typing import ClassVar, Any, Tuple, Type, List
 import csv
 import numpy as np

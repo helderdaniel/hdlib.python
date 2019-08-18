@@ -1,9 +1,10 @@
-#Abstract class to give default behaviour to subclasses that
-# manipulate multiple data series together
-#
-#v0.1 feb 2019
-#hdaniel@ualg.pt
-#
+'''
+Abstract class to give default behaviour to subclasses that
+manipulate multiple data series together
+
+v0.1 feb 2019
+hdaniel@ualg.pt
+'''
 from hdlib.data.dataseries.dataseries import DataSeries
 
 ##############

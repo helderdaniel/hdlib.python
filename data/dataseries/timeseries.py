@@ -1,8 +1,9 @@
-#Manipulate multiple data series together
-#
-#v0.1 feb 2019
-#hdaniel@ualg.pt
-#
+'''
+Manipulate multiple data series together
+
+v0.1 feb 2019
+hdaniel@ualg.pt
+'''
 from typing import ClassVar, Any, Tuple, List
 import csv
 import pandas as pd

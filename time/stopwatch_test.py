@@ -1,8 +1,8 @@
-"""
+'''
 Stopwatch
 v0.1 jan 2019
 hdaniel@ualg.pt
-"""
+'''
 from hdlib.time.stopwatch import Stopwatch
 import time
 

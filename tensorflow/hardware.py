@@ -1,8 +1,9 @@
-#id hardware avaiable to tensorflow
-#
-#v0.1 jan 2019
-#hdaniel@ualg.py
-#
+'''
+id hardware avaiable to tensorflow
+
+v0.1 jan 2019
+hdaniel@ualg.py
+'''
 import tensorflow as tf
 from tensorflow.python.client import device_lib 
 

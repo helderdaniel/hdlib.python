@@ -1,9 +1,9 @@
-#Simple chrome browser htl, javascript parser
-#
-#v0.1 jul 2019
-#hdaniel@ualg.pt
-#
 '''
+Simple chrome browser htl, javascript parser
+
+v0.1 jul 2019
+hdaniel@ualg.pt
+
 Note: needs chrome browser driver installed:
 
 $> sudo apt install chromium-chromedriver

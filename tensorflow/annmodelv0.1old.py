@@ -1,11 +1,9 @@
-'''
-Define ANN models and algorithms base class
-Defines also some common network topologies
-
-v0.1 jan 2019
-v0.2 aug 2019
-hdaniel@ualg.pt
-'''
+#Define ANN models and algorithms base class
+#Defines also some common network topologies
+#
+#v0.1 jan 2019
+#hdaniel@ualg.pt
+#
 import tensorflow as tf
 from tensorflow.keras.callbacks import ModelCheckpoint, EarlyStopping, ReduceLROnPlateau
 import pandas as pd

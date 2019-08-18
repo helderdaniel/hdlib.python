@@ -1,8 +1,8 @@
-"""
+'''
 Stopwatch
 v0.1 jan 2019
 hdaniel@ualg.pt
-"""
+'''
 #perf_count only available in 3.7
 #but tensoflow only supports 3.6 by the end of 2018.
 #got to checkit later

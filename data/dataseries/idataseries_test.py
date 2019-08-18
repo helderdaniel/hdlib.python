@@ -1,8 +1,9 @@
-#Interface to define methods to classes that manipulate multiple data series together
-#
-#v0.1 feb 2019
-#hdaniel@ualg.pt
-#
+'''
+Interface to define methods to classes that manipulate multiple data series together
+
+v0.1 feb 2019
+hdaniel@ualg.pt
+'''
 from hdlib.data.dataseries.idataseries import IDataSeries
 
 ##############
