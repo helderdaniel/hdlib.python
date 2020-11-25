@@ -3,9 +3,10 @@ Compare predicted series unit tests
 v0.1 nov 2020
 hdaniel@ualg.pt
 '''
-from hdlib.data.series.tools import Tools
+
 import numpy as np
 from sklearn.metrics import mean_squared_error as mse
+from hdlib.data.series.ComparePrediction import ComparePrediction
 
 ##############
 # Unit tests #
@@ -29,35 +30,38 @@ class TestComparePredicition(unittest.TestCase):
     """Unit tests."""
     def testDiffLengths0(self):
         with self.assertRaises(RuntimeError) as context:
-            Tools.predictedCommon([0, 1], [0, 2, 3, 4], 1)
+            ComparePrediction([0, 1], [0, 2, 3, 4], 1)
             self.assertTrue('actual and predicted should have same length' in str(context.exception))
 
     def testInvalidHorizon0(self):
         with self.assertRaises(RuntimeError) as context:
-            Tools.predictedCommon([0, 1], [0, 2], -33)
+            ComparePrediction([0, 1], [0, 2], -33)
             self.assertEqual('0 <= horizon <= series length', str(context.exception))
 
     def testInvalidHorizon1(self):
         with self.assertRaises(RuntimeError) as context:
-            Tools.predictedCommon([0, 1], [0, 2], -1)
+            ComparePrediction([0, 1], [0, 2], -1)
             self.assertEqual('0 <= horizon <= series length', str(context.exception))
 
     def testInvalidHorizon2(self):
         with self.assertRaises(RuntimeError) as context:
-            Tools.predictedCommon([0, 1], [0, 2], 3)
+            ComparePrediction([0, 1], [0, 2], 3)
             self.assertEqual('0 <= horizon <= series length', str(context.exception))
 
     def testExactPredictionElements(self):
-        ap = Tools.predictedCommon(actual0, predict0, horizon0)
+        cp = ComparePrediction(actual0, predict0, horizon0)
+        ap = cp.commonPoints()
         self.assertTrue((ap[0] == ap[1]).all)
         self.assertTrue((ap[0] == common0).all)
 
     def testExactPredictionMSE0(self):
-        ap = Tools.predictedCommon(actual0, predict0, horizon0)
+        cp = ComparePrediction(actual0, predict0, horizon0)
+        ap = cp.commonPoints()
         self.assertEqual(mse(ap[0],ap[1]), mse0)
 
     def testNaivePredictionMSE0(self):
-        ap = Tools.predictedCommon(actual0, predict1, horizon0)
+        cp = ComparePrediction(actual0, predict1, horizon0)
+        ap = cp.commonPoints()
         self.assertEqual(mse(ap[0],ap[1]), mse1)
 
 
