@@ -1,5 +1,5 @@
 '''
-Stopwatch
+Stopwatch unit tests
 v0.1 jan 2019
 hdaniel@ualg.pt
 '''

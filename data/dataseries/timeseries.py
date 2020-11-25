@@ -120,6 +120,14 @@ class TimeSeries (DataSeries):
 	'''
 	Indexing
 	'''
+	def shifTimeIndex(self, delta: float) -> None:
+		'''
+        Shifts time index by delta seconds or fractions of seconds:
+        	60 is a minute, 0.001 is a ms
+        '''
+		self._rawData.index = (self._rawData.index + pd.Timedelta(seconds=delta))
+
+
 	def findExpectedSamples(self, resolution: float) -> int:
 		'''
 		returns the number of samples for a time series sarting at begin
@@ -144,7 +152,7 @@ class TimeSeries (DataSeries):
 	def interpolate(self, resolution:float) -> None:
 		'''
 		reindexed and interpolated to add missing samples at given resolution in seconds,
-		or supress samples.
+		or suppress samples.
 		
 		Index must be sorted with <DataSeries>.sortIndex()
 		Works in place

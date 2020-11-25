@@ -3,6 +3,7 @@ Abstract class to give default behaviour to subclasses that
 manipulate multiple data series together
 
 v0.1 feb 2019
+v0.2 set 2020 added shuffle method
 hdaniel@ualg.pt
 '''
 from abc import ABC, abstractmethod
@@ -10,6 +11,7 @@ from hdlib.data.dataseries.idataseries import IDataSeries
 from hdlib.base import Base
 import pandas as pd
 import numpy as np
+import random
 from sklearn.preprocessing import MinMaxScaler
 from typing import ClassVar, Any, Tuple, Type
 
@@ -58,7 +60,7 @@ class DataSeries(IDataSeries, Base):
 		super().__init__() #Init _rawData and index nested classes
 	
 
-	Note: Can not verify tipe with mypy because if we set -> 'DataSeries'
+	Note: Cannot verify type with mypy because if we set -> 'DataSeries'
    		  mypy find that:
 		  self._cls has no attribute fromDatFrame()
 
@@ -218,8 +220,15 @@ class DataSeries(IDataSeries, Base):
 		self.iat  = self._IAT (self.__dict__, type(self))
 		self._scaler = None
 	
-	#If user defined class must express between '' or it will not find the type
-	def copy(self) -> 'DataSeries':
+	#Do not implement __copy__ and __deepcopy__
+	#instead implement copy(self) which is a full (deep)copy of the object
+	'''
+	def __copy__(self) -> 'DataSeries': ##If user defined class must express between '' or it will not find the type
+		return self.copy()
+	def __deepcopy__(self) -> 'DataSeries':
+		return self.copy()
+	'''
+	def copy(self) -> 'DataSeriess':
 		'''Deep copy object'''
 		
 		#From scratch
@@ -353,7 +362,7 @@ class DataSeries(IDataSeries, Base):
 	
 	def _rawInterpolate(self, rng) -> None:
 		'''
-		reindexed and interpolated to add missing samples, or supress samples,
+		reindexed and interpolated to add missing samples, or suppress samples,
 		over given rng
 		
 		Index must be sorted with <DataSeries>.sortIndex()
@@ -363,6 +372,28 @@ class DataSeries(IDataSeries, Base):
 		'''
 		self._rawData = self._rawData.reindex(rng)
 		self._rawData = self._rawData.interpolate()  #default: method='linear' interpolation
+
+
+	def shuffle(self, sliceLen:int=1) -> 'DataSeries':
+		'''
+		shuffles Dataseries in slices of len sleceLen
+		'''
+		
+		r:range = range(0, len(self._rawData), sliceLen)
+		l:int = len(r)
+		rnd = pd.DataFrame([])
+		
+		for _ in range(0, l):
+		    n = random.randint(0,l-1)
+		    part = self._rawData.iloc[n * sliceLen:(n + 1) * sliceLen - 1, :]
+		    rnd = rnd.append(part, ignore_index=True)
+
+		begin = self._rawData.index[0]
+		idx = pd.date_range(start=begin, periods=len(rnd), freq='T')
+		rnd = rnd.set_index(idx)
+		
+		obj = type(self)._rawFromDataFrame(rnd, copy=True)
+		return obj
 
 
 

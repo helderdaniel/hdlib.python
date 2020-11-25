@@ -77,11 +77,12 @@ class TestSimpleSeries(unittest.TestCase):
 		self.assertEqual(ds0.findExpectedSamples(100), 1)
 		ds1 = ds0.reversed()
 		self.assertEqual(ds1.findExpectedSamples(0.1), 401)
-
+	
 	''' Copy and creation '''
 	def testDeepCopy0(self) -> None:
 		ds0 = type(self).marketDataSS
-		ds1 = ds0.copy()
+		#ds1 = ds0.copy()
+		ds1 = copy(ds0)
 		
 		#Test different storage for data
 		buf = ds1.at[0,'Open'] #or: buf = ds1.iat[0, 3]
