@@ -10,10 +10,21 @@ import matplotlib.patches as mpatches
 from hdlib.base import Base
 
 class ComparePrediction(Base):
+    __LABELACT   = "actual"
+    __LABELPRED  = "prediction"
+    __LABELX     = "time (steps)"
+    __LABELY     = "value"
+    __TITLECMP   = 'Predictions vs actual'
+    __TITLENAIVE = 'Prediction skewed to check naive forecast'
+    __LEGENDLOC  = "upper right"
+
     """Compares series prediction"""
     "It assumes a series are unidimensional numpy arrays"
 
-    def plot(self, begin=0, end=-1, overlap=False) -> None:
+    def plot(self, begin=0, end=-1, overlap=False, 
+                   labelact=__LABELACT, labelpred=__LABELPRED,
+                   labelx=__LABELX, labely=__LABELY,
+                   title="", xtatitle=""):
         """
         Plot prediction against actual data
 
@@ -22,6 +33,8 @@ class ComparePrediction(Base):
                            If matches it is naive forecasting
                            (prediction is equal to previous points)
         :param begin, end  range of point to predict
+
+        :returns           figure and single axis, so that it can be saved or plotted
         """
 
         #set range
@@ -30,22 +43,29 @@ class ComparePrediction(Base):
 
         #define overlap mode or normal
         if overlap:
-            graphTitle = 'Prediction skewed to check naive forecast'
+            if title == "":
+                title = 'Prediction skewed to check naive forecast'
             tp = range(begin, end)
         else:
-            graphTitle = 'Predictions vs actual'
+            if title == "":
+                title = 'Predictions vs actual'
             tp = range(begin+self.__horizon, end + self.__horizon)
         
-        plt.plot(t0, self.__actual[begin:end], 'g', label='actual')
-        plt.plot(tp, self.__predict[begin:end], 'r', label='prediction')
+        #Add extra text to title
+        title += xtatitle
+
+
+        #plot
+        fig, axs = plt.subplots(1, constrained_layout=True)
+        axs.plot(t0, self.__actual[begin:end], 'g', label=labelact)
+        axs.plot(tp, self.__predict[begin:end], 'r', label=labelpred)
 
         #legend
-        plt.title(graphTitle)
-        plt.xlabel("time (steps)")
-        plt.ylabel("value")
-        plt.legend(loc="upper right")
-
-        plt.show()
+        axs.set_title(title)
+        axs.set_xlabel(labely)
+        axs.set_ylabel(labelx)
+        axs.legend(loc=ComparePrediction.__LEGENDLOC) #or: self.__LEGENDLOC
+        return fig, axs
 
 
     def __init__(self, actual:np.array, predict:np.array, horizon:int) -> None:
