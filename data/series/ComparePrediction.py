@@ -21,53 +21,6 @@ class ComparePrediction(Base):
     """Compares series prediction"""
     "It assumes a series are unidimensional numpy arrays"
 
-    def plot(self, begin=0, end=-1, overlap=False, 
-                   labelact=__LABELACT, labelpred=__LABELPRED,
-                   labelx=__LABELX, labely=__LABELY,
-                   title="", xtatitle=""):
-        """
-        Plot prediction against actual data
-
-        :param overlap     if true, skew back prediction self.__horizon points
-                           to overlap with actual data.
-                           If matches it is naive forecasting
-                           (prediction is equal to previous points)
-        :param begin, end  range of point to predict
-
-        :returns           figure and single axis, so that it can be saved or plotted
-        """
-
-        #set range
-        if end == -1: end = self.__nsamples
-        t0 = range(begin, end)
-
-        #define overlap mode or normal
-        if overlap:
-            if title == "":
-                title = 'Prediction skewed to check naive forecast'
-            tp = range(begin, end)
-        else:
-            if title == "":
-                title = 'Predictions vs actual'
-            tp = range(begin+self.__horizon, end + self.__horizon)
-        
-        #Add extra text to title
-        title += xtatitle
-
-
-        #plot
-        fig, axs = plt.subplots(1, constrained_layout=True)
-        axs.plot(t0, self.__actual[begin:end], 'g', label=labelact)
-        axs.plot(tp, self.__predict[begin:end], 'r', label=labelpred)
-
-        #legend
-        axs.set_title(title)
-        axs.set_xlabel(labely)
-        axs.set_ylabel(labelx)
-        axs.legend(loc=ComparePrediction.__LEGENDLOC) #or: self.__LEGENDLOC
-        return fig, axs
-
-
     def __init__(self, actual:np.array, predict:np.array, horizon:int) -> None:
         """
         :param actual:  the actual series
@@ -122,3 +75,53 @@ class ComparePrediction(Base):
         """
         return  (self.__actual[self.__horizon:], \
                  self.__predict[:self.__nsamples-self.__horizon])
+                 
+
+
+    def plot(self, begin=0, end=-1, overlap=False, 
+                   labelact=__LABELACT, labelpred=__LABELPRED,
+                   labelx=__LABELX, labely=__LABELY,
+                   title="", xtatitle=""):
+        """
+        Plot prediction against actual data
+
+        :param overlap     if true, skew back prediction self.__horizon points
+                           to overlap with actual data.
+                           If matches it is naive forecasting
+                           (prediction is equal to previous points)
+        :param begin, end  range of point to predict
+
+        :returns           figure and single axis, so that it can be saved or plotted
+        """
+
+        #set range
+        if end == -1: end = self.__nsamples
+        t0 = range(begin, end)
+
+        #define overlap mode or normal
+        if overlap:
+            if title == "":
+                title = 'Prediction skewed to check naive forecast'
+            tp = range(begin, end)
+        else:
+            if title == "":
+                title = 'Predictions vs actual'
+            tp = range(begin+self.__horizon, end + self.__horizon)
+        
+        #Add extra text to title
+        title += xtatitle
+
+
+        #plot
+        fig, axs = plt.subplots(1, constrained_layout=True)
+        axs.plot(t0, self.__actual[begin:end], 'g', label=labelact)
+        axs.plot(tp, self.__predict[begin:end], 'r', label=labelpred)
+
+        #legend
+        axs.set_title(title)
+        axs.set_xlabel(labely)
+        axs.set_ylabel(labelx)
+        axs.legend(loc=ComparePrediction.__LEGENDLOC) #or: self.__LEGENDLOC
+        return fig, axs
+
+                 

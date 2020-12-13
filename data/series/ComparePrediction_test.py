@@ -36,7 +36,7 @@ mse1 = 9
 cpnaive = ComparePrediction(actual0, predict1, horizon0)
 
 
-class TestComparePredicition(unittest.TestCase):
+class TestComparePrediction(unittest.TestCase):
     """Unit tests."""
     def testDiffLengths0(self):
         with self.assertRaises(RuntimeError) as context:
