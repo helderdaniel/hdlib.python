@@ -25,7 +25,7 @@ class ComparePrediction(Base):
         """
         :param actual:  the actual series
         :param predict: the predicted series (of actual)
-        :param horizon: horizon defines how steps in future is the first prediction
+        :param horizon: horizon defines how many steps in the future is the first prediction
                         cannot be larger than series length
         :return:
 
@@ -116,6 +116,7 @@ class ComparePrediction(Base):
         fig, axs = plt.subplots(1, constrained_layout=True)
         axs.plot(t0, self.__actual[begin:end], 'g', label=labelact)
         axs.plot(tp, self.__predict[begin:end], 'r', label=labelpred)
+        axs.grid()
 
         #legend
         axs.set_title(title)
