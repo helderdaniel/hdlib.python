@@ -76,7 +76,8 @@ class TestComparePrediction(unittest.TestCase):
     def testPlotCMP0(self):
         fig, axs = cpnaive.plot(xtatitle=" (MSE = " + str(mse1) +")")
         buffer = io.BytesIO()
-        fig.savefig(buffer) #fig.savefig('figcmp.png')
+        fig.savefig(buffer)
+        #fig.savefig('figcmp.png')
         file = open('testdata/figcmp.png','rb')
         self.assertEqual(buffer.getvalue(), file.read())
         buffer.close()
@@ -86,7 +87,8 @@ class TestComparePrediction(unittest.TestCase):
     def testPlotNAIVE0(self):
         fig, axs = cpnaive.plot(overlap=True, xtatitle=" (overlapping is bad)")
         buffer = io.BytesIO()
-        fig.savefig(buffer) #fig.savefig('fignaive.png')
+        fig.savefig(buffer)
+        #fig.savefig('fignaive.png')
         file = open('testdata/fignaive.png','rb')
         self.assertEqual(buffer.getvalue(), file.read())
         buffer.close()

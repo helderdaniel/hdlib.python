@@ -12,8 +12,8 @@ from hdlib.base import Base
 class ComparePrediction(Base):
     __LABELACT   = "actual"
     __LABELPRED  = "prediction"
-    __LABELX     = "time (steps)"
-    __LABELY     = "value"
+    __LABELX     = "value"
+    __LABELY     = "time (steps)"
     __TITLECMP   = 'Predictions vs actual'
     __TITLENAIVE = 'Prediction skewed to check naive forecast'
     __LEGENDLOC  = "upper right"
@@ -61,7 +61,7 @@ class ComparePrediction(Base):
 
 
 
-    def commonPoints(self) -> (np.array,np.array):
+    def commonPoints(self) -> (np.array, np.array):
         """
         These views have horizon samples less than the originals: actual and predict
 
@@ -74,10 +74,11 @@ class ComparePrediction(Base):
             Note: If predict is the same as actual (naive forecasting): actual == predict
         """
         return  (self.__actual[self.__horizon:], \
-                 self.__predict[:self.__nsamples-self.__horizon])
+                 #self.__predict[:self.__nsamples-self.__horizon])
+                 self.__predict[:-self.__horizon])
                  
 
-
+ 
     def plot(self, begin=0, end=-1, overlap=False, 
                    labelact=__LABELACT, labelpred=__LABELPRED,
                    labelx=__LABELX, labely=__LABELY,
