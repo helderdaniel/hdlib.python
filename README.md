@@ -1,2 +1,2 @@
 # hdlib
-python library
+hdaniel python library
