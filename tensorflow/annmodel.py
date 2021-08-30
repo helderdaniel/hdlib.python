@@ -129,11 +129,11 @@ class ANNModel():
             tfplt.plotTrainHistory(response)              
 
     #Predict
-    def predict(self, testXs):
+    def predict(self, testXs, testYs):
         #predict
         predict = self.model.predict(testXs)
         #set time index
-        predict = pd.DataFrame(predict, columns=['predict'], index=testXs.index)
+        predict = pd.DataFrame(predict, columns=['predict'], index=testYs.index)
         return predict
 
     def __str__(self):

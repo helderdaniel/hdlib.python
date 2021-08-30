@@ -14,7 +14,7 @@ def sessionDevices():
 	return tf.Session(config=tf.ConfigProto(log_device_placement=True))
 
 def sessionDevicesList():
-    return tf.Session().list_devices()
+	return tf.Session().list_devices()
 
 #Example: is not ran if imported!
 if __name__ == "__main__":
