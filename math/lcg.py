@@ -26,7 +26,8 @@ class LCG:
     
 
     @classmethod
-    def lcg(cls, seed : int = 0) -> LCG:
+    def lcg(cls, seed : int = None) -> LCG:
+        if seed is None: seed = cls.defaultSeed
         return LCG(cls.defaultSeed, cls.defaultMultiplier, 
                    cls.defaultIncrement, cls.defaultModulus)
 
@@ -40,10 +41,8 @@ class LCG:
         return self._x0
 
     '''
-     @pre bound > 0
-     
-     @return pseudo random long integer in [0, bound[
+    pre: bound > 0
+    returns: pseudo random integer in [0, bound[
     '''
     def nextInt(self, bound : int) -> int:
-        #return (int) Math.abs(update() % bound)
         return int(abs(self._update() % bound))
